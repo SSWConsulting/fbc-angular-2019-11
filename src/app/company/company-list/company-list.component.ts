@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Company } from '../company';
 import { CompanyService } from '../company.service';
 import { Subscription, Observable } from 'rxjs';
-import { takeWhile } from 'rxjs/operators';
+import { takeWhile, tap, finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'fbc-company-list',
@@ -18,7 +18,11 @@ export class CompanyListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.companies$ = this.companyService.getCompanies();
+    this.companies$ = this.companyService.getCompanies()
+    .pipe(
+      tap(c => console.log('Got company list', c)),
+      finalize(() => console.log('FINALIZE CALLED IN COMPONENT'))
+    );
   }
 
   // ngOnInit() {
