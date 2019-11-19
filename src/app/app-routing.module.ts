@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/company/list', pathMatch: 'full' },
   { path: 'company/list', component: CompanyListComponent },
   { path: 'company/add', component: CompanyEditComponent },
+  { path: 'company/edit/:id', component: CompanyEditComponent },
   { path: '**', component: NotFoundComponent }
 ];
 
