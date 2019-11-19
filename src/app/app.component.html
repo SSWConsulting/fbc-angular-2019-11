@@ -1,4 +1,16 @@
 
-<h1> Welcome to {{title}} </h1>
+<nav class="navbar navbar-light bg-faded">
+    <a class="navbar-brand">Welcome to {{title}}</a>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item" [routerLinkActive]="'active'">
+        <a class="nav-link" [routerLink]="['/company/list']">Companies</a>
+      </li>
+    </ul>
+  </nav>
 
-<fbc-company-list></fbc-company-list>
+<div class="container">
+    <router-outlet></router-outlet>
+</div>
+
+
+
