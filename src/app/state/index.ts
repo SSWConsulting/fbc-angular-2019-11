@@ -18,7 +18,8 @@ export const reducers: ActionReducerMap<AppState> = {
   company: companyReducer
 };
 
-export const metaReducers: MetaReducer<AppState>[] = !environment.production ? [] : [];
+export const metaReducers: MetaReducer<AppState>[]
+= !environment.production ? [] : [];
 
 export const AllEffects = [
 ];

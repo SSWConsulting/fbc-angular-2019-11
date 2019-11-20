@@ -30,6 +30,7 @@ import { metaReducers } from './state/index';
     ReactiveFormsModule,
     NgbModule,
     HttpClientModule,
+
     StoreModule.forRoot(reducers, {
       metaReducers,
 			runtimeChecks: {
@@ -38,6 +39,7 @@ import { metaReducers } from './state/index';
 			}
 		}),
   ],
+
   providers: [],
   bootstrap: [AppComponent]
 })
