@@ -15,7 +15,7 @@ export interface AppState {
 }
 
 export const reducers: ActionReducerMap<AppState> = {
-  company: reducer
+  company: companyReducer
 };
 
 export const metaReducers: MetaReducer<AppState>[]
