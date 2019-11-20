@@ -18,7 +18,7 @@ export class CompanyService {
 
   constructor(
     private httpClient: HttpClient,
-    private store: Store<CompanyState>
+    private store: Store<AppState>
   ) {
     this.loadCompanies();
   }
@@ -33,7 +33,8 @@ export class CompanyService {
   }
 
   getCompanies(): Observable<Company[]> {
-    return this.store.select(s => s.companies);
+    return this.store.select(s => s.company.companies)
+    .pipe(tap(t => console.log('getCompanies value', t)));
   }
 
   deleteCompany(company: Company) {
