@@ -10,7 +10,7 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('firebootcamp-crm app is running!');
+    expect(page.getTitleText()).toEqual('Welcome to firebootcamp-crm');
   });
 
   afterEach(async () => {
