@@ -23,8 +23,7 @@ export class CompanyListComponent implements OnInit {
 
   deleteCompany(company: Company) {
     console.log('Delete Button Clicked');
-    this.companyService.deleteCompany(company)
-    .subscribe(c => this.companies$ = this.loadCompanies());
+    this.companyService.deleteCompany(company);
   }
 
   loadCompanies() {
