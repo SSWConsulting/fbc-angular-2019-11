@@ -2,7 +2,11 @@ import { Injectable } from '@angular/core';
 import { Company } from './company';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of, BehaviorSubject } from 'rxjs';
-import { catchError, finalize } from 'rxjs/operators';
+import { catchError, finalize, tap } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { AppState } from '../state';
+import * as companyActions from '../state/company/actions';
+import { CompanyState } from '../state/company/reducer';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +15,10 @@ export class CompanyService {
 
   API_BASE = 'http://firebootcamp-crm-api.azurewebsites.net/api';
 
-  private companiesSubject$: BehaviorSubject<Company[]> = new BehaviorSubject<Company[]>([]);
-  companies$ = this.companiesSubject$.asObservable();
 
   constructor(
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private store: Store<CompanyState>
   ) {
     this.loadCompanies();
   }
@@ -24,12 +27,13 @@ export class CompanyService {
     this.httpClient.get<Company[]>(`${this.API_BASE}/company`)
     .pipe(
       catchError(e => this.errorHandler(e)),
-      finalize(() => console.log('Complete'))
-    ).subscribe(list => this.companiesSubject$.next(list));
+      finalize(() => console.log('Complete')),
+      tap(t => console.log('loaded some companies', t))
+    ).subscribe(list => this.store.dispatch(companyActions.setCompanies({companies: list})));
   }
 
   getCompanies(): Observable<Company[]> {
-    return this.companies$;
+    return this.store.select(s => s.companies);
   }
 
   deleteCompany(company: Company) {

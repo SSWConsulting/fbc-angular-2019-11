@@ -10,6 +10,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { CompanyTableComponent } from './company/company-table/company-table.component';
 import { CompanyEditComponent } from './company/company-edit/company-edit.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { StoreModule } from '@ngrx/store';
+import { companyReducer } from './state/company/reducer';
+import { reducers } from './state';
+import { metaReducers } from './state/index';
 
 @NgModule({
   declarations: [
@@ -25,7 +29,14 @@ import { NotFoundComponent } from './not-found/not-found.component';
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    StoreModule.forRoot(reducers, {
+      metaReducers,
+			runtimeChecks: {
+				strictStateImmutability: true,
+				strictActionImmutability: true
+			}
+		}),
   ],
   providers: [],
   bootstrap: [AppComponent]
