@@ -8,11 +8,12 @@ export class CompanyState {
 export const initialState: CompanyState = {
   companies: []
 } as CompanyState;
-export const companyReducer = createReducer(initialState,
+
+const reducer = createReducer(initialState,
   on(companyActions.setCompanies, (state, action) => {
     return { companies: action.companies };
   })
 );
-export function reducer(state: CompanyState | undefined, action: Action) {
-  return companyReducer(state, action);
+export function companyReducer(state: CompanyState | undefined, action: Action) {
+  return reducer(state, action);
 }
