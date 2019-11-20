@@ -7,14 +7,14 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../state';
 import * as companyActions from '../state/company/actions';
 import { CompanyState } from '../state/company/reducer';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CompanyService {
 
-  API_BASE = 'http://firebootcamp-crm-api.azurewebsites.net/api';
-
+  API_BASE = environment.API_BASE;
 
   constructor(
     private httpClient: HttpClient,
